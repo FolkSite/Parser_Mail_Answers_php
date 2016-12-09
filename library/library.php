@@ -19,16 +19,13 @@ function http_request_mailru($url)
             curl_setopt($curl, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36');
             curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
             $result = curl_exec($curl);
-            //echo('>>>>>'.$result.'<br>');
             $info = curl_getinfo($curl, CURLINFO_HTTP_CODE);
             if (curl_errno($curl)) {
                 print curl_error($curl) . '<br>';
             }
-            //print_r(array(curl_getinfo( $curl)),array(curl_error ($curl)) );
-            //echo('<br>End process');
             curl_close($curl);
             if (($result <> null) and ($info = 200)) {
-                echo('<br>Запрос успешно выполен<br>');
+                //echo('<br>Запрос успешно выполен<br>');
                 return $result;
             } else {
                 echo('<br>Запрос не выполен!!!<br>');
