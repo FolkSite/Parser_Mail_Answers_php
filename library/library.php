@@ -56,4 +56,38 @@ function MailSmtp($content)
     }
 }
 
+function MailSmtp2($content)
+{
+    require $_SERVER["DOCUMENT_ROOT"] . '/library/PHPMailer/PHPMailerAutoload.php';
+    include_once "cfg/mail.cfg.php";
+    $mail = new PHPMailer;
+    $mail->isSMTP();
+    $mail->SMTPAuth = true;
+    $mail->Username = $smtp_user; // SMTP account username
+    $mail->Password = $smtp_password;        // SMTP account password
+    $mail->CharSet = 'UTF-8';
+    $mail->Host = $smtp_server;
+    $mail->Port = $smtp_port;
+    $mail->From = $smtp_user;
+    $mail->FromName = 'ParserMailRuAnswers';
+    $email_to_array = explode(';', $reciever);
+    foreach ($email_to_array as $key => $email) {
+        $email = ltrim($email, '');
+        $mail->addAddress($email);
+    }
+    $mail->isHTML(true);
+
+    $mail->Subject = $subject;
+    $mail->Body = $content;
+    //$mail->SMTPDebug  = 1;
+
+
+    $upp = $mail->send();
+    if ($upp) {
+        echo "Письмо успешно отправлено";
+    } else {
+        echo "Письмо не отправлено. Ошибка";
+    }
+}
+
 

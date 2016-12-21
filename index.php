@@ -76,5 +76,5 @@ if ($msg_body <> '') {
     echo '<br>----------------------------------RESULT---------------------------------- <br>';
     echo $msg_body;
     $msg_body .= '<br> Время выполнения:' . round($time, 2) . ' сек.';
-    MailSmtp($msg_body);
+    MailSmtp2($msg_body);
 }
